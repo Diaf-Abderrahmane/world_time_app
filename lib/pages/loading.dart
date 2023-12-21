@@ -27,6 +27,18 @@ class _LoadingState extends State<Loading> {
 
     print(finalTime);
     print(timeZone);
+
+    Navigator.pushReplacementNamed(context, "/home", arguments: {
+      "time": finalTime,
+      "location": timeZone,
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getData();
   }
 
   @override
@@ -39,14 +51,6 @@ class _LoadingState extends State<Loading> {
             color: Colors.amber,
             size: 100,
           ),
-          ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  getData();
-                  Navigator.pushReplacementNamed(context, "/home");
-                });
-              },
-              child: Text("GO TO HOME"))
         ]),
       ),
     );

@@ -12,6 +12,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    Map receivedDataFromLoadingScreen =
+        ModalRoute.of(context)!.settings.arguments as Map;
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -47,14 +50,14 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: [
                   Text(
-                    "03:30 pm",
+                    receivedDataFromLoadingScreen["time"],
                     style: TextStyle(fontSize: 50, color: Colors.black),
                   ),
                   SizedBox(
                     height: 22,
                   ),
                   Text(
-                    "Algeria - Algiers",
+                    receivedDataFromLoadingScreen["location"],
                     style: TextStyle(fontSize: 28, color: Colors.black),
                   ),
                 ],
