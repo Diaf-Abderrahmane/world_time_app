@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -15,11 +16,13 @@ class _HomeState extends State<Home> {
     Map receivedDataFromLoadingScreen =
         ModalRoute.of(context)!.settings.arguments as Map;
 
+    String bgImg =
+        receivedDataFromLoadingScreen["isDay"] ? "day.png" : "night.png";
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/day.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/$bgImg"), fit: BoxFit.cover),
         ),
         child: SizedBox(
           width: double.infinity,

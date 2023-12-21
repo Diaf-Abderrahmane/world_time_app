@@ -19,11 +19,17 @@ class _LoadingState extends State<Loading> {
         Uri.parse('http://worldtimeapi.org/api/timezone/Africa/Algiers'));
     Map receivedData = jsonDecode(response.body);
 
+    late bool isDayTime;
     DateTime dateTime = DateTime.parse(receivedData["utc_datetime"]);
     int offset = int.parse(receivedData["utc_offset"].substring(0, 3));
     dateTime = dateTime.add(Duration(hours: offset));
     String finalTime = DateFormat.jm().format(dateTime);
     String timeZone = receivedData["timezone"];
+    if (dateTime.hour > 5 && dateTime.hour < 18) {
+      isDayTime = true;
+    } else {
+      isDayTime = false;
+    }
 
     print(finalTime);
     print(timeZone);
@@ -31,6 +37,7 @@ class _LoadingState extends State<Loading> {
     Navigator.pushReplacementNamed(context, "/home", arguments: {
       "time": finalTime,
       "location": timeZone,
+      "isDay": isDayTime,
     });
   }
 
