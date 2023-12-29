@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:world_time_app/classes/getdata.dart';
 
 class Location extends StatefulWidget {
   const Location({super.key});
@@ -28,7 +29,13 @@ class _LocationState extends State<Location> {
                 surfaceTintColor: Colors.white,
                 elevation: 50,
                 child: ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context, {
+                      "time": "11",
+                      "location": "algeria",
+                      "isDay": false,
+                    });
+                  },
                   title: Text("data"),
                   leading: CircleAvatar(
                     backgroundImage: AssetImage("assets/algeria.png"),

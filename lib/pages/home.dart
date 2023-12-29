@@ -11,13 +11,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Map data = {};
+
   @override
   Widget build(BuildContext context) {
-    Map receivedDataFromLoadingScreen =
-        ModalRoute.of(context)!.settings.arguments as Map;
+    data =
+        data.isEmpty ? ModalRoute.of(context)!.settings.arguments as Map : data;
 
-    String bgImg =
-        receivedDataFromLoadingScreen["isDay"] ? "day.png" : "night.png";
+    String bgImg = data["isDay"] ? "day.png" : "night.png";
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -31,6 +32,13 @@ class _HomeState extends State<Home> {
                 onPressed: () async {
                   dynamic result =
                       await Navigator.pushNamed(context, '/location');
+                  setState(() {
+                    data = {
+                      "time": result["time"],
+                      "location": result["location"],
+                      "isDay": result["isDay"]
+                    };
+                  });
                 },
                 icon: Icon(
                   Icons.location_pin,
@@ -56,14 +64,14 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: [
                   Text(
-                    receivedDataFromLoadingScreen["time"],
+                    data["time"],
                     style: TextStyle(fontSize: 50, color: Colors.black),
                   ),
                   SizedBox(
                     height: 22,
                   ),
                   Text(
-                    receivedDataFromLoadingScreen["location"],
+                    data["location"],
                     style: TextStyle(fontSize: 28, color: Colors.black),
                   ),
                 ],
