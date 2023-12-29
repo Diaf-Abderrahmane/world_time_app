@@ -2,14 +2,19 @@ import 'package:http/http.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 
-class allCountries {
+class AllCountries {
+  String flag;
+  String countryName;
+  String url;
+  AllCountries(
+      {required this.flag, required this.countryName, required this.url});
+
   late bool isDayTime;
   late String finalTime;
   late String timeZone;
 
   getData() async {
-    Response response = await get(
-        Uri.parse('http://worldtimeapi.org/api/timezone/Africa/Algiers'));
+    Response response = await get(Uri.parse('$url'));
     Map receivedData = jsonDecode(response.body);
 
     DateTime dateTime = DateTime.parse(receivedData["utc_datetime"]);

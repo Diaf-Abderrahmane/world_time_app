@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, use_build_context_synchronously
 
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -16,7 +16,10 @@ class Loading extends StatefulWidget {
 
 class _LoadingState extends State<Loading> {
   getDataLoadingPage() async {
-    allCountries oneCountry = allCountries();
+    AllCountries oneCountry = AllCountries(
+        flag: "algeria.png",
+        countryName: "Algeria - Algiers",
+        url: 'http://worldtimeapi.org/api/timezone/Africa/Algiers');
     await oneCountry.getData();
     Navigator.pushReplacementNamed(context, "/home", arguments: {
       "time": oneCountry.finalTime,
