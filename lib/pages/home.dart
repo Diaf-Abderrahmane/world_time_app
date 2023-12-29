@@ -28,7 +28,10 @@ class _HomeState extends State<Home> {
           width: double.infinity,
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () async {
+                  dynamic result =
+                      await Navigator.pushNamed(context, '/location');
+                },
                 icon: Icon(
                   Icons.location_pin,
                   color: Colors.red,
